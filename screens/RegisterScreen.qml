@@ -4,7 +4,7 @@ import QtQuick.Controls
 Item{
     id: register
     width: 600
-    height: 795
+    height: 900
 
     Image {
         id: name

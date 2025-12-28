@@ -4,7 +4,7 @@ import QtQuick.Controls
 Item{
     id: home
     width: 600
-    height: 795
+    height: 900
 
     signal clickedTests
     signal clickedManage
@@ -55,6 +55,7 @@ Item{
                     verticalAlignment: Text.AlignVCenter
                     elide: Text.ElideRight
                 }
+                onClicked: home.clickedManage()
             }
             Button {
                 text: qsTr("Tutoriais")
@@ -71,6 +72,7 @@ Item{
                     verticalAlignment: Text.AlignVCenter
                     elide: Text.ElideRight
                 }
+                onClicked: home.clickedTutorials()
             }
         }
     }

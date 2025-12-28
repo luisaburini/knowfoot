@@ -5,44 +5,70 @@ import "./screens/"
 
 Window {
     width: 600
-    height: 795
+    height: 900
     visible: true
     title: qsTr("KnowFoot")
 
-    StackView{
-        id: stack
-        initialItem: homeScreen
-        anchors.fill: parent
-    }
-
-    FPIMalleolusScreen{
-        id: fpiMalleolusScreen
-        visible: false
-    }
-    FPIAbductionScreen{
-        id: fpiAbductionScreen
-        visible: false
-    }
-    FPICalcaneusScreen{
-        id: fpiCalcaneousScreen
-        visible: false
-    }
-    FPILongitudinalScreen{
-        id: fpiLongitudinalScreen
-        visible: false
-    }
-    FPIATNScreen{
-        id: fpiATNScreen
-        visible: false
-    }
-    FPITalusScreen{
-        id: fpiTalusScreen
-        visible: false
-    }
     ResultsScreen{
         id: resultsScreen
         visible: false
     }
+
+    FPITalusScreen{
+        id: fpiTalusScreen
+        visible: false
+        onNextPage: {
+            fpiTalusScreen.visible = false
+            resultsScreen.calculate(fpiMalleolusScreen.level,
+                                    fpiCalcaneousScreen.level,
+                                    fpiAbductionScreen.level,
+                                    fpiLongitudinalScreen.level,
+                                    fpiATNScreen.level,
+                                    fpiTalusScreen.level)
+            resultsScreen.visible = true
+        }
+    }
+    FPIATNScreen{
+        id: fpiATNScreen
+        visible: false
+        onNextPage: {
+            fpiATNScreen.visible = false
+            fpiTalusScreen.visible = true
+        }
+    }
+    FPILongitudinalScreen{
+        id: fpiLongitudinalScreen
+        visible: false
+        onNextPage: {
+            fpiLongitudinalScreen.visible = false
+            fpiATNScreen.visible = true
+        }
+    }
+    FPICalcaneusScreen{
+        id: fpiCalcaneousScreen
+        visible: false
+        onNextPage: {
+            fpiCalcaneousScreen.visible = false
+            fpiLongitudinalScreen.visible = true
+        }
+    }
+    FPIAbductionScreen{
+        id: fpiAbductionScreen
+        visible: false
+        onNextPage: {
+            fpiAbductionScreen.visible = false
+            fpiCalcaneousScreen.visible =true
+        }
+    }
+    FPIMalleolusScreen{
+        id: fpiMalleolusScreen
+        visible: false
+        onNextPage: {
+            fpiMalleolusScreen.visible = false
+            fpiAbductionScreen.visible = true
+        }
+    }
+
 
     ManageScreen{
         id: manageScreen
@@ -56,13 +82,29 @@ Window {
     TestScreen{
         id: testScreen
         visible: false
+        onClickedFPILeft: {
+            testScreen.visible = false
+            fpiMalleolusScreen.visible = true
+        }
+        onClickedFPIRight: {
+            testScreen.visible = false
+            fpiMalleolusScreen.visible = true
+        }
+        onBackHome: {
+            testScreen.visible = false
+            homeScreen.visible = false
+        }
     }
 
     HomeScreen{
         id: homeScreen
         onClickedTests: {
             testScreen.visible = true
-            stack.pop()
+            homeScreen.visible = false
+        }
+        onClickedManage: {
+            manageScreen.visible = true
+            homeScreen.visible = false
         }
     }
 }

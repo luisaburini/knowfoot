@@ -4,7 +4,15 @@ import QtQuick.Controls
 Item{
     id: results
     width: 600
-    height: 795
+    height: 900
+
+    signal redoTest()
+    signal newTest()
+    signal finish()
+
+    function calculate(malleolus, calcaneus, abduction, longitudinal, atn, talus) {
+        console.log(malleolus, calcaneus, abduction, longitudinal, atn, talus)
+    }
 
     Image {
         id: name
@@ -42,6 +50,7 @@ Item{
                     verticalAlignment: Text.AlignVCenter
                     elide: Text.ElideRight
                 }
+                onClicked: results.redoTest()
             }
             Button{
                 text: qsTr("Novo teste")
@@ -58,6 +67,7 @@ Item{
                     verticalAlignment: Text.AlignVCenter
                     elide: Text.ElideRight
                 }
+                onClicked: results.newTest()
             }
             Button{
                 text: qsTr("Concluir")
@@ -74,6 +84,7 @@ Item{
                     verticalAlignment: Text.AlignVCenter
                     elide: Text.ElideRight
                 }
+                onClicked: results.finish()
             }
         }
     }
